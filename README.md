@@ -1,6 +1,6 @@
 # 🛒 Walmart Sales Data Analysis
 
-> **End-to-end data analytics project using Python, Jupyter Notebook, PostgreSQL **
+**End-to-end data analytics project using Python, Jupyter Notebook, PostgreSQL 
 
 
 <img width="1672" height="941" alt="walmart" src="https://github.com/user-attachments/assets/5a10f01b-467a-4534-aaa4-04b89c1c5281" />
@@ -44,13 +44,14 @@ Business insets
 
 The main objectives of this project are:
 
-   - **Business Problem-Solving**: Write and execute complex SQL queries to answer critical business questions, such as:
+   - **Business Problem-Solving**:Execution of complex SQL queries to answer critical business questions, such as:
 
      - Revenue trends across branches and categories.
      - Identifying best-selling product categories.
      - Sales performance by time, city, and payment method.
      - Analyzing peak sales periods and customer buying patterns.
      - Profit margin analysis by branch and category.
+     - Cashless branches and cities identification.
 
 ---
 
@@ -133,13 +134,14 @@ The main objectives of this project are:
 ```python
 # ==========================================
 #importing dependencies 
-
+#importing toolkit 
 import pandas as pd
+import psycopg2
+from sqlalchemy import create_engine 
 
 # ==========================================
 # DATA INSPECTION
 # ==========================================
-
 df = pd.read_csv(
     Project- walmart\walmart-10k-sales-datasets\Walmart.csv',
     encoding_errors='ignore'
@@ -149,18 +151,17 @@ df.describe()
 df.head()
 df.info()
 
-
 # ==========================================
 # DATA CLEANING
 # ==========================================
 
-#count duplicats
+#count duplicates
 df.duplicated().sum()
 
-#Remove duplicats 
+#Remove duplicates 
 df.drop_duplicates(inplace= True)
 
-#count null
+#Count null
 df.isnull().sum()
 #Drop  all records with missing records 
 df.dropna(inplace= True)
@@ -180,16 +181,14 @@ df.columns = df.columns.str.lower()
 df.columns
 #Save clean data as csv
 df.to_csv('walmart_clean_data.csv',index=False)
+
 # ==========================================
-**Export this data to RDBMS (postgrsql)**
+Export this data to RDBMS (postgrsql)
 # ==========================================
-#importing toolkit 
-import psycopg2
-from sqlalchemy import create_engine 
 
 #create_engine("postgresql+psycopg2://scott:tiger@localhost/test")
 
-engine_psql = create_engine("postgresql+psycopg2://postgres:Analyst2026@localhost:5432/walmart_db")
+engine_psql = create_engine("postgresql+psycopg2://postgres:****@localhost:***/****")
 
 try:
      engine_psql
@@ -202,18 +201,22 @@ except:
 df.to_sql(name='walmart',con= engine_psql, if_exists='append', index= False)
 
 
----
 
+
+```
 
 # 💻 SQL Analysis
 
 SQL was used to answer important business questions from the PostgreSQL database.
 
 ##📊 Business Questions
----
 
+```
+```
 ### Q1 Find different payment method and number of transactions, number of quantity sold.
-
+```
+```
+```sql
 ```sql
 select 
 	payment_method,
@@ -222,8 +225,6 @@ select
 from walmart
 group by 1
 ```
-
-
 
 ### Q2  Identify the highest-rated category in each branch, display the branch, category and avg rating .
 
@@ -369,111 +370,87 @@ ORDER BY 4
 LIMIT 5; 
 
 ```
+### Q10 cashless branches
+```sql
+SELECT branch, city
+FROM walmart
+GROUP BY branch, city
+HAVING SUM(CASE WHEN payment_method = 'Cash' THEN 1 ELSE 0 END) = 0;
+```
 
 
 # 💡 Key Business Insights
 
-Based on the analysis, the following insights were identified:
 
-### 1. 🏆 Best Performing Product
+🏦 Branches & Cities with Zero or Minimal Cash Transactions
+Zero Cash Transactions (entirely Ewallet/Credit Card):
 
-**[WRITE YOUR FINDING HERE]**
+Recent years (2020–2023): Branches like San Antonio (WALM003), Irving (WALM013), Brownwood (WALM090), Lewisville (WALM031), Weatherford (WALM099), Bedford (WALM064), Cleburne (WALM088), and several others show no cash transactions at all in the later years.
 
-Example:
+This indicates a shift toward digital payments in these cities.
 
-> The [PRODUCT CATEGORY] generated the highest total sales during the analyzed period.
+Minimal Cash Usage (very few cash records compared to digital):
 
-### 2. 🏢 Branch Performance
+Weslaco (WALM074, WALM082) – occasional small cash entries but dominated by Ewallet.
 
-**[WRITE YOUR FINDING HERE]**
+La Porte (WALM079) – mostly Ewallet, with rare low-value cash.
 
-### 3. 💳 Payment Behavior
+Canyon (WALM100) – cash transactions exist but are very low compared to Ewallet.
 
-**[WRITE YOUR FINDING HERE]**
+👉 These branches are effectively cashless or nearly cashless, which is critical for planning POS infrastructure and customer experience.
 
-### 4. 👥 Customer Behavior
+📊 Critical Business Insights
+Digital Payment Adoption Trend
 
-**[WRITE YOUR FINDING HERE]**
+From 2019 onwards, cash was common, but by 2020–2023, Ewallet dominates in many branches.
 
-### 5. 📈 Sales Trend
+Business decision: Invest more in digital payment systems and reduce cash-handling costs in cities already cash-free.
 
-**[WRITE YOUR FINDING HERE]**
+Branch-Level Profitability
 
-### 6. 💰 Profitability
+Branches like San Antonio, Garland, Irving, and Canyon consistently show high transaction totals with strong profit margins.
 
-**[WRITE YOUR FINDING HERE]**
+Business decision: These branches could be prioritized for new product launches or premium services.
 
----
+Customer Rating Patterns
 
-# 🚀 Business Recommendations
+Cities like Bryan, Lufkin, and Angleton often show higher ratings (8–10), while Corpus Christi, Denton, and Grapevine have lower averages (4–6).
 
-Based on the findings, the following recommendations can be considered:
+Business decision: Focus on customer satisfaction programs in lower-rated cities to improve loyalty.
 
-### Recommendation 1
+Category Insights
 
-**[ADD YOUR RECOMMENDATION HERE]**
+Health & Beauty and Food & Beverages dominate in transaction frequency.
 
-### Recommendation 2
+Sports & Travel and Fashion Accessories show high-value but less frequent purchases.
 
-**[ADD YOUR RECOMMENDATION HERE]**
+Business decision: Bundle promotions in high-frequency categories and targeted marketing for high-value categories.
 
-### Recommendation 3
+Seasonality
 
-**[ADD YOUR RECOMMENDATION HERE]**
+Many high-value transactions cluster around January–March, suggesting post-holiday shopping spikes.
 
-### Recommendation 4
+Business decision: Plan inventory and staffing around these seasonal peaks.
 
-**[ADD YOUR RECOMMENDATION HERE]**
+✅ Summary for Decision-Makers:
 
----
+Certain branches (San Antonio, Irving, Brownwood, Lewisville, Weatherford, Bedford, Cleburne) are already cashless → reduce cash infrastructure there.
 
-# 📁 Project Structure
+Focus on digital-first strategies (loyalty apps, QR payments).
 
-```text
-walmart-sales-analysis/
-│
-├── 📄 README.md
-│
-├── 📂 data/
-│   ├── raw/
-│   │   └── Walmart.csv
-│   │
-│   └── cleaned/
-│       └── [CLEANED_DATASET].csv
-│
-├── 📂 notebooks/
-│   └── walmart_analysis.ipynb
-│
-├── 📂 sql/
-│   └── walmart_analysis.sql
-│
-├── 📂 powerbi/
-│   └── walmart_dashboard.pbix
-│
-├── 📂 images/
-│   └── dashboard-preview.png
-│
-├── 📂 src/
-│   └── data_cleaning.py
-│
-├── 📄 requirements.txt
-│
-└── 📄 .gitignore
-```
+Improve customer experience in low-rating cities.
+
+Leverage seasonal demand for inventory planning.
+
+Prioritize high-profit branches for expansion and premium offerings.
 
 ---
 
-# ▶️ How to Run the Project
 
-## 1. Clone the Repository
+---
 
-```bash
-git clone [YOUR GITHUB REPOSITORY URL]
-```
 
-```bash
-cd walmart-sales-analysis
-```
+
 
 ---
 
@@ -485,156 +462,24 @@ pip install -r requirements.txt
 
 ---
 
-## 3. Open the Jupyter Notebook
 
-```bash
-jupyter notebook
+
+---
+
 ```
 
-Then open:
-
-```text
-notebooks/walmart_analysis.ipynb
+---
 ```
 
 ---
 
-# 🐘 PostgreSQL Setup
-
-Create a PostgreSQL database:
-
-```sql
-CREATE DATABASE [DATABASE_NAME];
-```
-
-Create the required table:
-
-```sql
-[PASTE YOUR CREATE TABLE SQL HERE]
-```
-
-Import the cleaned dataset:
-
-```text
-[ADD YOUR POSTGRESQL IMPORT INSTRUCTIONS HERE]
-```
-
 ---
 
-# 🔐 Database Connection
 
-Python was connected to PostgreSQL using SQLAlchemy.
-
-```python
-from sqlalchemy import create_engine
-
-engine = create_engine(
-    "postgresql+psycopg2://USERNAME:PASSWORD@localhost:5432/DATABASE_NAME"
-)
-
-[PASTE YOUR CONNECTION / QUERY CODE HERE]
-```
-
-> ⚠️ **Security:** Never upload your real PostgreSQL password, API keys, or other credentials to GitHub. Use environment variables or a `.env` file and add `.env` to `.gitignore`.
-
----
-
-# 📦 Requirements
-
-The main Python libraries used in this project are:
-
-```text
-pandas
-numpy
-matplotlib
-seaborn
-sqlalchemy
-psycopg2-binary
-jupyter
-```
-
-You can generate your requirements file using:
-
-```bash
-pip freeze > requirements.txt
-```
-
----
-
-# 📚 Skills Demonstrated
-
-This project demonstrates practical experience with:
-
-* ✅ Python
-* ✅ Pandas
-* ✅ NumPy
-* ✅ Jupyter Notebook
-* ✅ Data Cleaning
-* ✅ Exploratory Data Analysis
-* ✅ SQL
-* ✅ PostgreSQL
-* ✅ Database Management
-* ✅ Data Visualization
-* ✅ Power BI
-* ✅ DAX
-* ✅ Business Intelligence
-* ✅ Business Analysis
-* ✅ Data Storytelling
-* ✅ Git & GitHub
-
----
-
-# 🎓 What I Learned
-
-Through this project, I strengthened my ability to:
-
-* Work with real-world datasets
-* Clean and transform raw data
-* Perform exploratory data analysis
-* Write SQL queries for business analysis
-* Work with PostgreSQL databases
-* Build Power BI dashboards
-* Create DAX measures
-* Extract actionable business insights
-* Present data-driven recommendations
-* Manage an analytics project using Git and GitHub
-
----
-
-# 🔮 Future Improvements
-
-Potential future improvements include:
-
-* [ ] Add automated data pipelines
-* [ ] Connect Power BI directly to PostgreSQL
-* [ ] Add more advanced DAX measures
-* [ ] Add customer segmentation
-* [ ] Perform predictive sales analysis
-* [ ] Automate data cleaning
-* [ ] Add scheduled data refresh
-* [ ] Deploy the dashboard for online access
-
----
-
-# 📸 Screenshots
-
-## Python / Jupyter Notebook
-
-![Jupyter Notebook](images/jupyter-preview.png)
-
-## PostgreSQL / SQL Analysis
-
-![PostgreSQL Analysis](images/postgresql-preview.png)
-
-## Power BI Dashboard
-
-![Power BI Dashboard](images/dashboard-preview.png)
-
----
 
 # 👨‍💻 Author
 
-**[YOUR NAME]**
+**Md Abir Hossain**
 
 Aspiring **Data Analyst | Business Analyst | BI Analyst**
 
@@ -642,11 +487,7 @@ Aspiring **Data Analyst | Business Analyst | BI Analyst**
 
 `SQL` `Python` `Pandas` `PostgreSQL` `Power BI` `DAX` `Excel` `Data Analytics`
 
-### Connect With Me
 
-* 💼 LinkedIn: [ADD YOUR LINKEDIN URL]
-* 🐙 GitHub: [ADD YOUR GITHUB URL]
-* 📧 Email: [ADD YOUR EMAIL]
 
 ---
 
@@ -658,9 +499,9 @@ If you found this project interesting or useful, consider giving the repository 
 
 ## 📌 Project Status
 
-**Status:** 🚧 In Progress / Completed
+**Status:** Completed
 
-**Last Updated:** [ADD DATE]
+**Last Updated:** 26/08/2026
 
 
 
