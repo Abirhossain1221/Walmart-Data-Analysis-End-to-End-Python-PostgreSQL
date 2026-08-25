@@ -201,7 +201,12 @@ except:
 
 df.to_sql(name='walmart',con= engine_psql, if_exists='append', index= False)
 
-
+select 
+	payment_method,
+	count(*) as no_transactions,
+	sum(quantity) as no_quantity
+from walmart
+group by 1
 ---
 
 # 3️⃣ Exploratory Data Analysis
@@ -233,19 +238,7 @@ Exploratory Data Analysis was performed using Python and Pandas to understand th
 
 ---
 
-#  PostgreSQL Database
 
-After cleaning the dataset, the data was imported into **PostgreSQL** for structured storage and SQL-based analysis.
-
-### Database
-
-```text
-Database Name:
-[ADD DATABASE NAME]
-
-Table Name:
-[ADD TABLE NAME]
-```
 
 # 5️⃣ SQL Analysis
 
@@ -253,10 +246,15 @@ SQL was used to answer important business questions from the PostgreSQL database
 
 ## 📊 Business Questions
 
-### Question 1 — What is the total revenue?
+###  Q1 Find different payment method and number of transactions, number of quantity sold .
 
 ```sql
-[PASTE YOUR SQL QUERY HERE]
+select 
+	payment_method,
+	count(*) as no_transactions,
+	sum(quantity) as no_quantity
+from walmart
+group by 1
 ```
 
 ### Question 2 — Which product category generates the highest sales?
