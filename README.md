@@ -79,9 +79,9 @@ The main objectives of this project are:
 
 ### Dataset Size
 
-* Number of rows: **[10000]**
-* Number of columns: **[11]**
-* Time period: **[01/01/19 - 31/12/23]**
+* Number of rows: **10000**
+* Number of columns: *11*
+* Time period: **01/01/19 - 31/12/23**
 
 
 ---
