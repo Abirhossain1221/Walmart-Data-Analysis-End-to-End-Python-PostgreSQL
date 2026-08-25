@@ -201,46 +201,11 @@ except:
 
 df.to_sql(name='walmart',con= engine_psql, if_exists='append', index= False)
 
-select 
-	payment_method,
-	count(*) as no_transactions,
-	sum(quantity) as no_quantity
-from walmart
-group by 1
----
-
-# 3️⃣ Exploratory Data Analysis
-
-Exploratory Data Analysis was performed using Python and Pandas to understand the structure and characteristics of the dataset.
-
-### Areas Analyzed
-
-* Sales distribution
-* Product performance
-* Branch performance
-* Customer types
-* Payment methods
-* Gender distribution
-* Revenue trends
-* Customer ratings
-* Gross income
-* Quantity sold
-
-### EDA Code
-
-```python
-# ==========================================
-# EXPLORATORY DATA ANALYSIS
-# ==========================================
-
-[PASTE YOUR EDA CODE HERE]
-```
 
 ---
 
 
-
-# 5️⃣ SQL Analysis
+# 💻 SQL Analysis
 
 SQL was used to answer important business questions from the PostgreSQL database.
 
@@ -257,127 +222,155 @@ from walmart
 group by 1
 ```
 
-### Question 2 — Which product category generates the highest sales?
+### Q2  Identify the highest-rated category in each branch, display the branch, category and avg rating .
 
 ```sql
-[PASTE YOUR SQL QUERY HERE]
+SELECT *		
+FROM 
+	( SELECT
+		branch,
+		category,
+		avg(rating) AS rating,
+		RANK() OVER(PARTITION BY branch ORDER BY avg(rating) DESC) as rank 
+	FROM walmart
+	GROUP BY 1,2 
+)
+WHERE rank = 1 ;
 ```
 
-### Question 3 — Which branch performs the best?
+### Q3 Identify the busiest day of each branch based on the nunber of transactions. 
+
 
 ```sql
-[PASTE YOUR SQL QUERY HERE]
+WITH cte AS
+(
+SELECT 
+	branch,
+	TO_CHAR(TO_DATE(date, 'DD-MM-YY'), 'DAY') AS day_name,
+	COUNT(*) AS no_transaction,
+	RANK() OVER (PARTITION BY branch ORDER BY COUNT(*)) AS rank
+
+FROM walmart
+GROUP BY 1, 2
+)
+select *
+from cte 
+WHERE rank = 1
 ```
 
-### Question 4 — Which payment method is most commonly used?
+### Q4 Calculate the total quantity of item sold per payment methon. List payment method and total quantity.
 
 ```sql
-[PASTE YOUR SQL QUERY HERE]
+SELECT 
+	payment_method,
+	SUM(quantity) AS total_quantity
+FROM walmart
+GROUP BY payment_method;
 ```
 
-### Question 5 — What is the average customer rating?
+### 
+Q5 Determine the average , minimum and maximum rating  of category for each city. 
+-- List the city, avg_rating, min_rating, max_rating .
 
 ```sql
-[PASTE YOUR SQL QUERY HERE]
+SELECT 
+	city,
+	category,
+	ROUND(AVG(rating:: NUMERIC), 2) AS avg_rating,
+	MIN(rating) AS min_rating,
+	MAX(rating) AS max_rating 
+	
+FROM walmart
+GROUP BY 1, 2;
+
+-- Catagory by city
+
+select city ,  count (category)
+from walmart
+group by city
 ```
 
-### Question 6 — Which products generate the highest gross income?
+### Q6 calculate the total profit for each category by considering .
 
 ```sql
-[PASTE YOUR SQL QUERY HERE]
+SELECT 
+	category,
+	SUM(unit_price*quantity) as revenue,
+	SUM(unit_price*quantity*profit_margin) as total_profit
+
+FROM walmart
+GROUP BY 1
 ```
 
-### Question 7 — What are the monthly sales trends?
+### Q7 Determine the most common payment method for each branch.
+--(display branch and the prefered payment method)
 
 ```sql
-[PASTE YOUR SQL QUERY HERE]
+SELECT * FROM
+(
+SELECT 
+	branch,
+	payment_method,
+	count(*) as total_payment,
+	RANK() OVER (PARTITION BY branch ORDER BY count(*) DESC) AS rank
+FROM walmart
+GROUP BY 1,2
+)
+WHERE rank = 1
 ```
 
-### Additional SQL Analysis
+### Q8 Categorize sales into 3 groups morning ,afternoon, evening . find out each shift and number of invoices .
 
 ```sql
-[PASTE YOUR ADDITIONAL SQL QUERIES HERE]
+SELECT 
+	branch,
+ 		CASE 
+		 WHEN EXTRACT(HOUR FROM time :: TIME ) < 12 THEN 'Morning'
+		 WHEN EXTRACT(HOUR FROM time :: TIME ) BETWEEN 12 AND 17 THEN 'Afternoon'
+		 ELSE 'Evening'
+		END AS day_time,
+		COUNT(*) AS no_invoice	
+FROM walmart
+GROUP BY 1,2
+ORDER BY 1,3 DESC;
+```
+### Q9 Identify 5 branch with highest desrease ratio in revenue compare to the last year (current year 2022 and last year 2023)
+
+```sql
+with ls AS
+(SELECT
+	branch,
+	SUM(total) AS ls_rev
+FROM walmart  
+WHERE EXTRACT (YEAR FROM TO_DATE(date, 'DD/MM/YY')) = 2022
+GROUP BY 1
+),
+
+cs AS
+(
+SELECT
+	branch,
+	SUM(total) cs_rev
+FROM walmart  
+WHERE EXTRACT (YEAR FROM TO_DATE(date, 'DD/MM/YY')) = 2023
+GROUP BY 1
+)
+
+SELECT
+	ls.branch,
+	ls.ls_rev,
+	cs.cs_rev,
+	ROUND((cs.cs_rev-ls.ls_rev):: NUMERIC /ls.ls_rev :: NUMERIC * 100,2) as rev_dec_ratio
+FROM ls
+JOIN cs
+ON ls.branch =cs.branch 
+ORDER BY 4 
+LIMIT 5; 
+
 ```
 
----
 
-# 📈 6️⃣ Power BI Dashboard
 
-The cleaned and analyzed data was used to create an interactive **Power BI dashboard**.
-
-## Dashboard Preview
-
-![Power BI Dashboard](images/dashboard-preview.png)
-
-> Replace `images/dashboard-preview.png` with the actual path to your dashboard screenshot.
-
----
-
-## 📊 Dashboard KPIs
-
-The dashboard includes the following key performance indicators:
-
-| KPI                    |           Value |
-| ---------------------- | --------------: |
-| Total Revenue          | **[ADD VALUE]** |
-| Total Sales            | **[ADD VALUE]** |
-| Total Quantity Sold    | **[ADD VALUE]** |
-| Gross Income           | **[ADD VALUE]** |
-| Average Rating         | **[ADD VALUE]** |
-| Number of Transactions | **[ADD VALUE]** |
-
----
-
-## 📊 Dashboard Visualizations
-
-The Power BI dashboard includes:
-
-* 📈 Sales trend analysis
-* 📊 Sales by product category
-* 🏢 Branch performance
-* 💳 Payment method analysis
-* 👥 Customer segmentation
-* ⭐ Customer rating analysis
-* 💰 Gross income analysis
-* 📅 Time-based sales analysis
-
----
-
-# 🧮 DAX Measures
-
-The following DAX measures were created in Power BI.
-
-### Total Sales
-
-```DAX
-[PASTE YOUR DAX MEASURE HERE]
-```
-
-### Total Quantity
-
-```DAX
-[PASTE YOUR DAX MEASURE HERE]
-```
-
-### Gross Income
-
-```DAX
-[PASTE YOUR DAX MEASURE HERE]
-```
-
-### Average Rating
-
-```DAX
-[PASTE YOUR DAX MEASURE HERE]
-```
-
-### Additional Measures
-
-```DAX
-[PASTE YOUR ADDITIONAL DAX MEASURES HERE]
-```
-
----
 
 # 💡 Key Business Insights
 
