@@ -223,6 +223,8 @@ from walmart
 group by 1
 ```
 
+
+
 ### Q2  Identify the highest-rated category in each branch, display the branch, category and avg rating .
 
 ```sql
@@ -302,8 +304,7 @@ FROM walmart
 GROUP BY 1
 ```
 
-### Q7 Determine the most common payment method for each branch.
---(display branch and the prefered payment method)
+### Q7 Determine the most common payment method for each branch.display branch and the prefered payment method
 
 ```sql
 SELECT * FROM
@@ -368,8 +369,6 @@ ORDER BY 4
 LIMIT 5; 
 
 ```
-
-
 
 
 # 💡 Key Business Insights
