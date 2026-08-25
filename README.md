@@ -40,6 +40,7 @@ Business insets
 ## 🎯 Business Objectives
 
 The main objectives of this project are:
+
      - Revenue trends across branches and categories.
      - Identifying best-selling product categories.
      - Sales performance by time, city, and payment method.
