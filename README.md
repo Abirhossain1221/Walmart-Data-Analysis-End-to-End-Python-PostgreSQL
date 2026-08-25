@@ -418,9 +418,8 @@ Many high-value transactions cluster around January–March, suggesting post-hol
 
 Business decision: Plan inventory and staffing around these seasonal peaks.
 
- # ✅ Summary for Decision-Makers:
+ ## ✅ Summary for Decision-Makers:
 
----text
 Certain branches (San Antonio, Irving, Brownwood, Lewisville, Weatherford, Bedford, Cleburne) are already cashless → reduce cash infrastructure there.
 
 Focus on digital-first strategies (loyalty apps, QR payments).
