@@ -41,6 +41,8 @@ Business insets
 
 The main objectives of this project are:
 
+   - **Business Problem-Solving**: Write and execute complex SQL queries to answer critical business questions, such as:
+
      - Revenue trends across branches and categories.
      - Identifying best-selling product categories.
      - Sales performance by time, city, and payment method.
