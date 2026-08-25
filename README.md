@@ -69,43 +69,20 @@ The main objectives of this project are:
 
 # 📂 Dataset
 
-### Dataset Name
+### Walmart 10k Sales Datasets
 
 **Walmart Sales Dataset**
 
 ### Source
 
-[ADD DATASET SOURCE HERE]
+ [Walmart Sales Dataset](https://www.kaggle.com/najir0123/walmart-10k-sales-datasets)
 
 ### Dataset Size
 
-* Number of rows: **[ADD NUMBER]**
-* Number of columns: **[ADD NUMBER]**
-* Time period: **[ADD TIME PERIOD]**
+* Number of rows: **[10000]**
+* Number of columns: **[11]**
+* Time period: **[01/01/19 - 31/12/23]**
 
-### Main Columns
-
-| Column                    | Description               |
-| ------------------------- | ------------------------- |
-| `invoice_id`              | Unique invoice identifier |
-| `branch`                  | Walmart branch            |
-| `city`                    | City/location             |
-| `customer_type`           | Customer classification   |
-| `gender`                  | Customer gender           |
-| `product_line`            | Product category          |
-| `unit_price`              | Price per unit            |
-| `quantity`                | Number of units purchased |
-| `tax_5_percent`           | 5% tax amount             |
-| `total`                   | Total transaction amount  |
-| `date`                    | Transaction date          |
-| `time`                    | Transaction time          |
-| `payment`                 | Payment method            |
-| `cogs`                    | Cost of goods sold        |
-| `gross_margin_percentage` | Gross margin percentage   |
-| `gross_income`            | Gross income              |
-| `rating`                  | Customer rating           |
-
-> **Note:** Update the column names above if your dataset uses different names.
 
 ---
 
