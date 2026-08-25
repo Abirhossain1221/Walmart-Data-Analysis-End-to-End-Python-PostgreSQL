@@ -366,9 +366,9 @@ GROUP BY branch, city
 HAVING SUM(CASE WHEN payment_method = 'Cash' THEN 1 ELSE 0 END) = 0;
 ```
 
-# 💡 Key Business Insights
+## 💡 Key Business Insights
 
-🏦 Branches & Cities with Zero or Minimal Cash Transactions
+### 🏦 Branches & Cities with Zero or Minimal Cash Transactions
 Zero Cash Transactions (entirely Ewallet/Credit Card):
 
 Recent years (2020–2023): Branches like San Antonio (WALM003), Irving (WALM013), Brownwood (WALM090), Lewisville (WALM031), Weatherford (WALM099), Bedford (WALM064), Cleburne (WALM088), and several others show no cash transactions at all in the later years.
@@ -385,7 +385,7 @@ Recent years (2020–2023): Branches like San Antonio (WALM003), Irving (WALM013
 
 -👉 These branches are effectively cashless or nearly cashless, which is critical for planning POS infrastructure and customer experience.
 
-# 📊 Critical Business Insights
+### 📊 Critical Business Insights
 Digital Payment Adoption Trend
 
 From 2019 onwards, cash was common, but by 2020–2023, Ewallet dominates in many branches.
@@ -418,7 +418,7 @@ Many high-value transactions cluster around January–March, suggesting post-hol
 
 Business decision: Plan inventory and staffing around these seasonal peaks.
 
- ## ✅ Summary for Decision-Makers:
+ ### ✅ Summary for Decision-Makers:
 
 Certain branches (San Antonio, Irving, Brownwood, Lewisville, Weatherford, Bedford, Cleburne) are already cashless → reduce cash infrastructure there.
 
@@ -444,13 +444,12 @@ Aspiring **Data Analyst | Business Analyst | BI Analyst**
 `SQL` `Python` `Pandas` `PostgreSQL` `Power BI` `DAX` `Excel` `Data Analytics`
 
 
-# ⭐ If You Find This Project Useful
+### ⭐ If You Find This Project Useful
 
 If you found this project interesting or useful, consider giving the repository a ⭐.
 
----
 
-## 📌 Project Status
+### 📌 Project Status
 
 **Status:** Completed
 
