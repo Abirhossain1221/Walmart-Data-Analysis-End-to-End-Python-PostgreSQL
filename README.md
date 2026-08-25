@@ -15,9 +15,9 @@ Here I utilize Python for data processing using ** kaggle API and cleaning, Post
 ### 1. Set Up the Environment
    - **Tools Used**: Visual Studio Code (VS Code), Python, SQL ( PostgreSQL)
    - **Python Libraries**:|
-  - `pandas`, `numpy`, `sqlalchemy`, `mysql-connector-python`, `psycopg2`
-- **Kaggle API Key** (for data downloading)
-   - **Goal**: Create a structured workspace within VS Code and organize project folders for smooth development and data handling.
+    `pandas`, `numpy`, `sqlalchemy`, `mysql-connector-python`, `psycopg2`
+   - **Kaggle API Key** (for data downloading)
+
 
 
 
