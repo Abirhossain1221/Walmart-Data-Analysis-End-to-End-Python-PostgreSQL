@@ -1,6 +1,6 @@
 # 🛒 Walmart Sales Data Analysis
 
-**End-to-end data analytics project using Python, Jupyter Notebook, PostgreSQL 
+End-to-end data analytics project using Python, Jupyter Notebook, PostgreSQL 
 
 
 <img width="1672" height="941" alt="walmart" src="https://github.com/user-attachments/assets/5a10f01b-467a-4534-aaa4-04b89c1c5281" />
@@ -133,7 +133,9 @@ The main objectives of this project are:
 
 ```python
 # ==========================================
-#importing dependencies 
+# IMPORTING DEPENDENCIES 
+# ==========================================
+importing dependencies 
 #importing toolkit 
 import pandas as pd
 import psycopg2
@@ -183,7 +185,7 @@ df.columns
 df.to_csv('walmart_clean_data.csv',index=False)
 
 # ==========================================
-Export this data to RDBMS (postgrsql)
+# EXPORT TO  RDBMS 
 # ==========================================
 
 #create_engine("postgresql+psycopg2://scott:tiger@localhost/test")
@@ -200,9 +202,6 @@ except:
 
 df.to_sql(name='walmart',con= engine_psql, if_exists='append', index= False)
 
-
-
-
 ```
 
 # 💻 SQL Analysis
@@ -211,12 +210,7 @@ SQL was used to answer important business questions from the PostgreSQL database
 
 ##📊 Business Questions
 
-```
-```
 ### Q1 Find different payment method and number of transactions, number of quantity sold.
-```
-```
-```sql
 ```sql
 select 
 	payment_method,
@@ -225,7 +219,6 @@ select
 from walmart
 group by 1
 ```
-
 ### Q2  Identify the highest-rated category in each branch, display the branch, category and avg rating .
 
 ```sql
@@ -244,7 +237,6 @@ WHERE rank = 1 ;
 
 ### Q3 Identify the busiest day of each branch based on the nunber of transactions. 
 
-
 ```sql
 WITH cte AS
 (
@@ -261,7 +253,6 @@ select *
 from cte 
 WHERE rank = 1
 ```
-
 ### Q4 Calculate the total quantity of item sold per payment methon. List payment method and total quantity.
 
 ```sql
@@ -271,9 +262,8 @@ SELECT
 FROM walmart
 GROUP BY payment_method;
 ```
-
 ### 
-Q5 Determine the average , minimum and maximum rating  of category for each city. List the city, avg_rating, min_rating, max_rating .
+Q5 Determine the average , minimum and maximum rating  of category for each city. List the city, avg_rating, min_rating, max_rating.
 
 ```sql
 SELECT 
@@ -304,7 +294,6 @@ SELECT
 FROM walmart
 GROUP BY 1
 ```
-
 ### Q7 Determine the most common payment method for each branch.display branch and the prefered payment method
 
 ```sql
@@ -337,7 +326,6 @@ GROUP BY 1,2
 ORDER BY 1,3 DESC;
 ```
 ### Q9 Identify 5 branch with highest desrease ratio in revenue compare to the last year (current year 2022 and last year 2023)
-
 ```sql
 with ls AS
 (SELECT
@@ -378,28 +366,26 @@ GROUP BY branch, city
 HAVING SUM(CASE WHEN payment_method = 'Cash' THEN 1 ELSE 0 END) = 0;
 ```
 
-
 # 💡 Key Business Insights
-
 
 🏦 Branches & Cities with Zero or Minimal Cash Transactions
 Zero Cash Transactions (entirely Ewallet/Credit Card):
 
 Recent years (2020–2023): Branches like San Antonio (WALM003), Irving (WALM013), Brownwood (WALM090), Lewisville (WALM031), Weatherford (WALM099), Bedford (WALM064), Cleburne (WALM088), and several others show no cash transactions at all in the later years.
 
-This indicates a shift toward digital payments in these cities.
+-This indicates a shift toward digital payments in these cities.
 
-Minimal Cash Usage (very few cash records compared to digital):
+-Minimal Cash Usage (very few cash records compared to digital):
 
-Weslaco (WALM074, WALM082) – occasional small cash entries but dominated by Ewallet.
+-Weslaco (WALM074, WALM082) – occasional small cash entries but dominated by Ewallet.
 
-La Porte (WALM079) – mostly Ewallet, with rare low-value cash.
+-La Porte (WALM079) – mostly Ewallet, with rare low-value cash.
 
-Canyon (WALM100) – cash transactions exist but are very low compared to Ewallet.
+-Canyon (WALM100) – cash transactions exist but are very low compared to Ewallet.
 
-👉 These branches are effectively cashless or nearly cashless, which is critical for planning POS infrastructure and customer experience.
+-👉 These branches are effectively cashless or nearly cashless, which is critical for planning POS infrastructure and customer experience.
 
-📊 Critical Business Insights
+# 📊 Critical Business Insights
 Digital Payment Adoption Trend
 
 From 2019 onwards, cash was common, but by 2020–2023, Ewallet dominates in many branches.
@@ -432,8 +418,9 @@ Many high-value transactions cluster around January–March, suggesting post-hol
 
 Business decision: Plan inventory and staffing around these seasonal peaks.
 
-✅ Summary for Decision-Makers:
+ # ✅ Summary for Decision-Makers:
 
+---text
 Certain branches (San Antonio, Irving, Brownwood, Lewisville, Weatherford, Bedford, Cleburne) are already cashless → reduce cash infrastructure there.
 
 Focus on digital-first strategies (loyalty apps, QR payments).
@@ -447,36 +434,6 @@ Prioritize high-profit branches for expansion and premium offerings.
 ---
 
 
----
-
-
-
-
----
-
-## 2. Install Python Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-
-
----
-
-```
-
----
-```
-
----
-
----
-
-
-
 # 👨‍💻 Author
 
 **Md Abir Hossain**
@@ -487,9 +444,6 @@ Aspiring **Data Analyst | Business Analyst | BI Analyst**
 
 `SQL` `Python` `Pandas` `PostgreSQL` `Power BI` `DAX` `Excel` `Data Analytics`
 
-
-
----
 
 # ⭐ If You Find This Project Useful
 
