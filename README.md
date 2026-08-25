@@ -2,7 +2,6 @@
 
 > **End-to-end data analytics project using Python, Jupyter Notebook, PostgreSQL **
 
-## Project Overview
 
 <img width="1672" height="941" alt="walmart" src="https://github.com/user-attachments/assets/5a10f01b-467a-4534-aaa4-04b89c1c5281" />
 
@@ -37,15 +36,10 @@ SQL Analysis
 Business insets 
 ```
 
-The goal is to transform raw sales data into meaningful insights that can support better business decision-making.
-
----
 
 ## 🎯 Business Objectives
 
 The main objectives of this project are:
-
- - **Business Problem-Solving**: Write and execute complex SQL queries to answer critical business questions, such as:
      - Revenue trends across branches and categories.
      - Identifying best-selling product categories.
      - Sales performance by time, city, and payment method.
