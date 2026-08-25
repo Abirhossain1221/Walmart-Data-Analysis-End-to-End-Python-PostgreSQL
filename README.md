@@ -79,7 +79,7 @@ The main objectives of this project are:
 
 ### Dataset Size
 
-* Number of rows: 10000
+* Number of rows: 10051
 * Number of columns: 11
 * Time period: 01/01/19 - 31/12/23
 
@@ -137,21 +137,43 @@ The main objectives of this project are:
 import pandas as pd
 # ==========================================
 
-[PASTE YOUR PYTHON DATA LOADING CODE HERE]
+df = pd.read_csv(
+    Project- walmart\walmart-10k-sales-datasets\Walmart.csv',
+    encoding_errors='ignore'
 
-
+df.shape
+df.describe()
+df.head()
+df.info()
 # ==========================================
 # DATA INSPECTION
 # ==========================================
 
-[PASTE YOUR DATA INSPECTION CODE HERE]
+df = pd.read_csv(
+    Project- walmart\walmart-10k-sales-datasets\Walmart.csv',
+    encoding_errors='ignore'
+
+df.shape
+df.describe()
+df.head()
+df.info()
 
 
 # ==========================================
 # DATA CLEANING
 # ==========================================
 
-[PASTE YOUR DATA CLEANING CODE HERE]
+#count duplicats
+df.duplicated().sum()
+
+#Remove duplicats 
+df.drop_duplicates(inplace= True)
+
+#count null
+df.isnull().sum()
+#Drop  all records with missing records 
+df.dropna(inplace= True)
+
 
 
 # ==========================================
