@@ -135,16 +135,7 @@ The main objectives of this project are:
 #importing dependencies 
 
 import pandas as pd
-# ==========================================
 
-df = pd.read_csv(
-    Project- walmart\walmart-10k-sales-datasets\Walmart.csv',
-    encoding_errors='ignore'
-
-df.shape
-df.describe()
-df.head()
-df.info()
 # ==========================================
 # DATA INSPECTION
 # ==========================================
@@ -174,14 +165,42 @@ df.isnull().sum()
 #Drop  all records with missing records 
 df.dropna(inplace= True)
 
+df.dtypes
+df["unit_price"]= df["unit_price"].str.replace('$','').astype(float)
 
+df.head()
+df.columns
+#creating a new column called Total
+df['total'] = df['unit_price']*df['quantity']
+df.head()
 
+#converting columns to lower case
+
+df.columns = df.columns.str.lower()
+df.columns
+#Save clean data as csv
+df.to_csv('walmart_clean_data.csv',index=False)
 # ==========================================
-# FEATURE ENGINEERING
+**Export this data to RDBMS (postgrsql)**
 # ==========================================
+#importing toolkit 
+import psycopg2
+from sqlalchemy import create_engine 
 
-[PASTE YOUR FEATURE ENGINEERING CODE HERE]
-```
+#create_engine("postgresql+psycopg2://scott:tiger@localhost/test")
+
+engine_psql = create_engine("postgresql+psycopg2://postgres:Analyst2026@localhost:5432/walmart_db")
+
+try:
+     engine_psql
+     print("Connection succeded to Postgrsql")
+except:
+     print("Unable to connect")
+
+#uploading data to postgrsql
+
+df.to_sql(name='walmart',con= engine_psql, if_exists='append', index= False)
+
 
 ---
 
@@ -214,7 +233,7 @@ Exploratory Data Analysis was performed using Python and Pandas to understand th
 
 ---
 
-# 4️⃣ PostgreSQL Database
+#  PostgreSQL Database
 
 After cleaning the dataset, the data was imported into **PostgreSQL** for structured storage and SQL-based analysis.
 
@@ -227,32 +246,6 @@ Database Name:
 Table Name:
 [ADD TABLE NAME]
 ```
-
-### Database Structure
-
-```text
-PostgreSQL
-│
-└── [DATABASE NAME]
-      │
-      └── [TABLE NAME]
-            ├── invoice_id
-            ├── branch
-            ├── city
-            ├── customer_type
-            ├── product_line
-            ├── unit_price
-            ├── quantity
-            ├── total
-            ├── payment
-            ├── date
-            ├── time
-            ├── cogs
-            ├── gross_income
-            └── rating
-```
-
----
 
 # 5️⃣ SQL Analysis
 
