@@ -209,9 +209,10 @@ df.to_sql(name='walmart',con= engine_psql, if_exists='append', index= False)
 
 SQL was used to answer important business questions from the PostgreSQL database.
 
-## 📊 Business Questions
+##📊 Business Questions
+---
 
-###  Q1 Find different payment method and number of transactions, number of quantity sold .
+### Q1 Find different payment method and number of transactions, number of quantity sold.
 
 ```sql
 select 
@@ -269,8 +270,7 @@ GROUP BY payment_method;
 ```
 
 ### 
-Q5 Determine the average , minimum and maximum rating  of category for each city. 
--- List the city, avg_rating, min_rating, max_rating .
+Q5 Determine the average , minimum and maximum rating  of category for each city. List the city, avg_rating, min_rating, max_rating .
 
 ```sql
 SELECT 
