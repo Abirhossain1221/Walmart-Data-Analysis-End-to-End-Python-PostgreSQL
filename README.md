@@ -55,10 +55,7 @@ The main objectives of this project are:
 
 | Tool                | Purpose                                |
 | ------------------- | -------------------------------------- |
-| 🐍 Python           | Data analysis and preprocessing using
-|                        **Python Libraries**:
-                           - `pandas`, `numpy`, `sqlalchemy`,
-                          - `mysql-connector-python`, `psycopg2`
+| 🐍 Python           | Data analysis and preprocessing using  |  
 | 🐼 Pandas           | Data cleaning and manipulation         |
 | 📓 Jupyter Notebook | Exploratory Data Analysis              |
 | 🐘 PostgreSQL       | Database storage and analysis          |
