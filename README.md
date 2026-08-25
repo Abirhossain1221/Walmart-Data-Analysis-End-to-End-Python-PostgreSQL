@@ -1,46 +1,40 @@
-# Walmart-Data-Analysis-End-to-End-Python-PostgreSQL
+# 🛒 Walmart Sales Data Analysis
+
+> **End-to-end data analytics project using Python, Jupyter Notebook, PostgreSQL **
 
 ## Project Overview
 
 <img width="1672" height="941" alt="walmart" src="https://github.com/user-attachments/assets/5a10f01b-467a-4534-aaa4-04b89c1c5281" />
 
+## 📌 Project Overview
 This project is an end-to-end data analysis solution designed to extract critical business insights from Walmart sales data.
-Here I utilize Python for data processing using kaggle API and cleaning, SQL for advanced querying, and structured problem-solving techniques to solve key business questions. 
+Here I utilize Python for data processing using ** kaggle API and cleaning, PostgrSQL** for advanced querying, and structured problem-solving techniques to solve key business questions. 
 
 ---
 ## Project Steps
 
 ### 1. Set Up the Environment
-   - **Tools Used**: Visual Studio Code (VS Code), Python, SQL (MySQL and PostgreSQL)
+   - **Tools Used**: Visual Studio Code (VS Code), Python, SQL ( PostgreSQL)
    - **Goal**: Create a structured workspace within VS Code and organize project folders for smooth development and data handling.
 
 
-# 🛒 Walmart Sales Data Analysis
-
-> **End-to-end data analytics project using Python, Jupyter Notebook, PostgreSQL, SQL, and Power BI.**
-
----
-
-## 📌 Project Overview
-
-This project analyzes Walmart sales data to identify important **sales trends, customer behavior, product performance, and business insights**.
 
 The project follows a complete data analytics workflow:
 
 ```text
-Raw Dataset
+Kaggle API set up
+     ↓
+Connect to Walmart sales datasets
      ↓
 Python & Pandas
      ↓
 Data Cleaning & Exploration
      ↓
-PostgreSQL
+Connect to PostgreSQL using `sqlalchemy`
      ↓
 SQL Analysis
      ↓
-Power BI
-     ↓
-Dashboard & Business Insights
+Business insets 
 ```
 
 The goal is to transform raw sales data into meaningful insights that can support better business decision-making.
@@ -51,16 +45,12 @@ The goal is to transform raw sales data into meaningful insights that can suppor
 
 The main objectives of this project are:
 
-* Analyze overall sales performance
-* Identify top-performing product categories
-* Analyze sales by branch/location
-* Understand customer purchasing behavior
-* Analyze payment methods
-* Identify sales trends
-* Calculate important business KPIs
-* Find patterns and relationships within the dataset
-* Build an interactive Power BI dashboard
-* Generate actionable business recommendations
+ - **Business Problem-Solving**: Write and execute complex SQL queries to answer critical business questions, such as:
+     - Revenue trends across branches and categories.
+     - Identifying best-selling product categories.
+     - Sales performance by time, city, and payment method.
+     - Analyzing peak sales periods and customer buying patterns.
+     - Profit margin analysis by branch and category.
 
 ---
 
@@ -73,8 +63,6 @@ The main objectives of this project are:
 | 📓 Jupyter Notebook | Exploratory Data Analysis              |
 | 🐘 PostgreSQL       | Database storage and analysis          |
 | 💻 SQL              | Data querying and business analysis    |
-| 📊 Power BI         | Dashboard and visualization            |
-| 🧮 DAX              | Power BI calculations                  |
 | 🔧 Git & GitHub     | Version control and project management |
 
 ---
