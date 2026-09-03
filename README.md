@@ -7,7 +7,7 @@ End-to-end data analytics project using Python, Jupyter Notebook, PostgreSQL
 
 ## 📌 Project Overview
 This project is an end-to-end data analysis solution designed to extract critical business insights from Walmart sales data.
-Here I utilize Python for data processing using ** kaggle API and cleaning, PostgrSQL** for advanced querying, and structured problem-solving techniques to solve key business questions. 
+Here I utilize Python for data processing using **kaggle API and cleaning, PostgrSQL** for advanced querying, and structured problem-solving techniques to solve key business questions. 
 
 ---
 ## Project Steps
